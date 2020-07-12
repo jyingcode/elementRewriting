@@ -24,4 +24,10 @@ export default {
 .dashbaord {
 	height: 100%;
 }
+.content {
+	width: calc(100% - 200px);
+	height: calc(100% - 64px);
+	float: left;
+	padding: 0 30px 0 30px;
+}
 </style>

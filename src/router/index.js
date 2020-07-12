@@ -2,12 +2,21 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Dashbaord from '../components/Dashbaord'
 import Login from '../components/Login'
+import Index from '../components/Content/index'
 Vue.use(Router)
 
 export const constantRoutes = [
 	{
 		path: '/dashbaord',
 		component: Dashbaord,
+		redirect: '/dashbaord/index',
+		children: [
+			{
+				path: 'index',
+				component: Index,
+				hidden: true,
+			},
+		],
 		hidden: true,
 	},
 	{

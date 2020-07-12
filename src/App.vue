@@ -35,4 +35,10 @@ body {
 	outline: none;
 	margin-left: -80px;
 }
+.el-menu-item:hover {
+	background-color: rgba(152, 144, 144, 0.65) !important;
+}
+.el-submenu__title:hover {
+	background-color: rgba(152, 144, 144, 0.65) !important;
+}
 </style>
