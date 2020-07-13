@@ -54,16 +54,58 @@
 			</el-form-item>
 
 			<el-button v-if="!show" type="primary" @click="onDeleft"
-				>收起</el-button
-			>
+				>展开<i class="el-icon-arrow-down"></i>
+			</el-button>
 			<el-button v-if="show" type="primary" @click="onshow"
-				>张开</el-button
-			>
+				>收起 <i class="el-icon-arrow-up"></i
+			></el-button>
 		</el-form>
 		<el-row>
-			<el-button type="primary">主要按钮</el-button>
+			<el-button type="primary" @click="changeData(search)"
+				>新增</el-button
+			>
 		</el-row>
-
+		<el-dialog :visible.sync="dialogTableVisible">
+			<el-form
+				ref="form"
+				class="father-element"
+				:model="search"
+				label-width="80px"
+			>
+				<el-form-item label="登录名" prop="loginName">
+					<el-input
+						v-model="search.loginName"
+						placeholder="请输入内容"
+					></el-input>
+				</el-form-item>
+				<el-form-item label="联系人" prop="linkPerson">
+					<el-input
+						v-model="search.linkPerson"
+						disabled
+						placeholder="请输入内容"
+					></el-input>
+				</el-form-item>
+				<el-form-item label="角色" prop="roleId">
+					<el-input
+						v-model="search.roleId"
+						placeholder="请输入内容"
+					></el-input>
+				</el-form-item>
+				<el-form-item label="状态" prop="status">
+					<el-input
+						v-model="search.status"
+						placeholder="请输入内容"
+					></el-input>
+				</el-form-item>
+				<el-form-item label="时间更新" prop="date">
+					<el-input
+						v-model="search.date"
+						placeholder="请输入内容"
+					></el-input>
+				</el-form-item>
+				<button class="submit-but">确定</button>
+			</el-form>
+		</el-dialog>
 		<el-table
 			:data="tableData"
 			border
@@ -89,7 +131,9 @@
 					size="small"
 					>查看</el-button
 				>
-				<el-button type="text" size="small">编辑</el-button>
+				<el-button type="text" size="small" @click="changeData(item)"
+					>编辑</el-button
+				>
 			</el-table-column>
 		</el-table>
 	</div>
@@ -125,6 +169,7 @@ export default {
 				status: '',
 				date: '',
 			},
+			dialogTableVisible: false,
 			status: [
 				{
 					enable: false,
@@ -135,6 +180,7 @@ export default {
 					value: '启用',
 				},
 			],
+
 			tableData: [
 				{
 					date: '2016-05-02',
@@ -144,6 +190,7 @@ export default {
 					address: '上海市普陀区金沙江路 1518 弄',
 					zip: 200333,
 				},
+
 				{
 					date: '2016-05-04',
 					name: '王小虎',
@@ -193,6 +240,11 @@ export default {
 		},
 		handleClick(row) {
 			console.log(row)
+		},
+		changeData(search) {
+			console.log(search)
+			this.dialogTableVisibl = true
+			this.search = JSON.parse(JSON.stringify(search))
 		},
 	},
 }
