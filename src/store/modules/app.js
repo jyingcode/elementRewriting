@@ -1,5 +1,5 @@
 import { login, addData } from '../../Api/index'
-import { resolve, reject } from 'core-js/fn/promise'
+// import { resolve, reject } from 'core-js/fn/promise'
 const state = {
 	token: '',
 	username: '',
@@ -37,24 +37,24 @@ const actions = {
 				})
 		})
 	},
-	// addData({ commit }, data) {
-	// 	console.log(commit)
-	// 	console.log(data)
-	// 	return new Promise((resolve, reject) => {
-	// 		addData(data)
-	// 			.then(({ code, data, msg }) => {
-	// 				if (code === 0) {
-	// 					commit('SET_LOGINNAME', data.loginName)
-	// 					resolve({ code, data })
-	// 				} else {
-	// 					reject({ code, data, msg })
-	// 				}
-	// 			})
-	// 			.catch((err) => {
-	// 				reject(err)
-	// 			})
-	// 	})
-	// },
+	addData({ commit }, data) {
+		console.log(commit)
+		console.log(data)
+		return new Promise((resolve, reject) => {
+			addData(data)
+				.then(({ code, data, msg }) => {
+					if (code === 0) {
+						commit('SET_LOGINNAME', data.loginName)
+						resolve({ code, data })
+					} else {
+						reject({ code, data, msg })
+					}
+				})
+				.catch((err) => {
+					reject(err)
+				})
+		})
+	},
 }
 
 export default {

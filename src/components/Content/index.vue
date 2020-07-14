@@ -253,17 +253,16 @@ export default {
 			this.search = JSON.parse(JSON.stringify(search))
 		},
 		addData() {
-			console.log('11345616')
-			// const data = {
-			// 	loginName: this.search.loginName,
-			// 	linkPerson: this.search.linkPerson,
-			// 	roleId: this.search.roleId,
-			// 	status: this.search.status,
-			// 	date: this.search.date,
-			// }
-			// this.$store.dispatch('addData', data).then(() => {
-			// 	console.log('login succuss')
-			// })
+			const data = {
+				loginName: this.search.loginName,
+				linkPerson: this.search.linkPerson,
+				roleId: this.search.roleId,
+				status: this.search.status,
+				date: this.search.date,
+			}
+			this.$store.dispatch('addData', data).then(() => {
+				console.log('login succuss')
+			})
 		},
 	},
 }
