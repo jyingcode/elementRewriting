@@ -107,7 +107,7 @@
 						placeholder="请输入内容"
 					></el-input>
 				</el-form-item>
-				<button class="submit-but">确定</button>
+				<button class="submit-but" @click="addData()">确定</button>
 			</el-form>
 		</el-dialog>
 		<el-table
@@ -251,6 +251,19 @@ export default {
 			console.log(search)
 			this.dialogTableVisible = true
 			this.search = JSON.parse(JSON.stringify(search))
+		},
+		addData() {
+			console.log('11345616')
+			// const data = {
+			// 	loginName: this.search.loginName,
+			// 	linkPerson: this.search.linkPerson,
+			// 	roleId: this.search.roleId,
+			// 	status: this.search.status,
+			// 	date: this.search.date,
+			// }
+			// this.$store.dispatch('addData', data).then(() => {
+			// 	console.log('login succuss')
+			// })
 		},
 	},
 }
