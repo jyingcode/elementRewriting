@@ -14,3 +14,10 @@ export function addData(data) {
 		data,
 	})
 }
+export function getList(params) {
+	return request({
+		url: '/getList',
+		method: 'get',
+		params,
+	})
+}

@@ -1,5 +1,7 @@
 import Mock from 'mockjs'
 import form from './form'
+import table from './table'
+import login from './login'
 
 /**
  * @param {string} url
@@ -21,7 +23,7 @@ function param2Obj(url) {
 	)
 }
 
-const mocks = [...form]
+const mocks = [...form, ...table, ...login]
 
 // for front mock
 // please use it cautiously, it will redefine XMLHttpRequest,

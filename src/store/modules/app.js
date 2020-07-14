@@ -1,9 +1,8 @@
 import { login, addData } from '../../Api/index'
-// import { resolve, reject } from 'core-js/fn/promise'
+
 const state = {
 	token: '',
 	username: '',
-	loginName: '',
 }
 const mutations = {
 	SET_USERNAME: (s, v) => {
@@ -11,9 +10,6 @@ const mutations = {
 	},
 	SET_TOKEN: (s, v) => {
 		s.token = v
-	},
-	SET_LOGINNAME: (s, v) => {
-		s.loginName = v
 	},
 }
 
@@ -44,7 +40,6 @@ const actions = {
 			addData(data)
 				.then(({ code, data, msg }) => {
 					if (code === 0) {
-						commit('SET_LOGINNAME', data.loginName)
 						resolve({ code, data })
 					} else {
 						reject({ code, data, msg })
