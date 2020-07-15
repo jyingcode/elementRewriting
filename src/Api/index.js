@@ -21,3 +21,10 @@ export function getList(params) {
 		params,
 	})
 }
+export function modifyData(data) {
+	return request({
+		url: '/modifyData',
+		method: 'post',
+		data,
+	})
+}

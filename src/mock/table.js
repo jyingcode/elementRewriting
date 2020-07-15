@@ -12,6 +12,7 @@ export default [
 			} = query
 			let list = [
 				{
+					id: 1,
 					date: '2016-05-04',
 					loginName: '王小虎',
 					linkPerson: '上海',
@@ -19,6 +20,7 @@ export default [
 					status: '0',
 				},
 				{
+					id: 2,
 					date: '2016-05-04',
 					loginName: '王小虎',
 					linkPerson: '上海',
@@ -26,6 +28,7 @@ export default [
 					status: '1',
 				},
 				{
+					id: 3,
 					date: '2016-05-04',
 					loginName: '张三',
 					linkPerson: '上海',

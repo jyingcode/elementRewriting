@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Dashbaord from '../components/Dashbaord'
 import Login from '../components/Login'
 import Index from '../components/Content/index'
+import Add from '../components/Content/Add'
 Vue.use(Router)
 
 export const constantRoutes = [
@@ -14,6 +15,11 @@ export const constantRoutes = [
 			{
 				path: 'index',
 				component: Index,
+				hidden: true,
+			},
+			{
+				path: 'add',
+				component: Add,
 				hidden: true,
 			},
 		],

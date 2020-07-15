@@ -1,4 +1,4 @@
-import { login, addData } from '../../Api/index'
+import { login, addData, modifyData } from '../../Api/index'
 
 const state = {
 	token: '',
@@ -33,9 +33,7 @@ const actions = {
 				})
 		})
 	},
-	addData({ commit }, data) {
-		console.log(commit)
-		console.log(data)
+	addData(data) {
 		return new Promise((resolve, reject) => {
 			addData(data)
 				.then(({ code, data, msg }) => {
@@ -49,6 +47,12 @@ const actions = {
 					reject(err)
 				})
 		})
+	},
+	async modifyData({ commit }, data) {
+		console.log(commit)
+		console.log(data)
+		const { code } = await modifyData(data)
+		return code
 	},
 }
 

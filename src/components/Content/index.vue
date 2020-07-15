@@ -69,43 +69,8 @@
 
     <el-row>
       <el-button type="primary"
-                 @click="changeData(search)">新增</el-button>
+                 @click="changeData('add')">新增</el-button>
     </el-row>
-    <el-dialog :visible.sync="dialogTableVisible">
-      <el-form ref="form"
-               class="father-element"
-               :model="search"
-               label-width="80px">
-        <el-form-item label="登录名"
-                      prop="loginName">
-          <el-input v-model="search.loginName"
-                    placeholder="请输入内容"></el-input>
-        </el-form-item>
-        <el-form-item label="联系人"
-                      prop="linkPerson">
-          <el-input v-model="search.linkPerson"
-                    disabled
-                    placeholder="请输入内容"></el-input>
-        </el-form-item>
-        <el-form-item label="角色"
-                      prop="roleId">
-          <el-input v-model="search.roleId"
-                    placeholder="请输入内容"></el-input>
-        </el-form-item>
-        <el-form-item label="状态"
-                      prop="status">
-          <el-input v-model="search.status"
-                    placeholder="请输入内容"></el-input>
-        </el-form-item>
-        <el-form-item label="时间更新"
-                      prop="date">
-          <el-input v-model="search.date"
-                    placeholder="请输入内容"></el-input>
-        </el-form-item>
-        <button class="submit-but"
-                @click="addData()">确定</button>
-      </el-form>
-    </el-dialog>
     <el-table ref="singleTable"
               :data="list"
               border
@@ -145,15 +110,47 @@
                      size="small">删除</el-button>
           <el-button type="text"
                      size="small"
-                     @click="changeData(search)">编辑</el-button>
+                     @click="changeData('edit', scope.row)">编辑</el-button>
         </template>
       </el-table-column>
     </el-table>
+    <el-dialog :visible.sync="dialogTableVisible">
+      <el-form ref="form"
+               class="father-element"
+               :model="dialogData"
+               label-width="80px">
+        <el-form-item label="登录名"
+                      prop="loginName">
+          <el-input v-model="dialogData.loginName"
+                    placeholder="请输入内容"></el-input>
+        </el-form-item>
+        <el-form-item label="联系人"
+                      prop="linkPerson">
+          <el-input v-model="dialogData.linkPerson"
+                    disabled
+                    placeholder="请输入内容"></el-input>
+        </el-form-item>
+        <el-form-item label="角色"
+                      prop="roleId">
+          <el-input v-model="dialogData.roleId"
+                    placeholder="请输入内容"></el-input>
+        </el-form-item>
+        <el-form-item label="状态"
+                      prop="status">
+          <el-input v-model="dialogData.status"
+                    placeholder="请输入内容"></el-input>
+        </el-form-item>
+
+        <button class="submit-but"
+                @click="addData()">确定</button>
+      </el-form>
+    </el-dialog>
   </div>
 </template>
 
 <script>
 import { getList } from '../../Api/index'
+
 export default {
   data() {
     return {
@@ -162,7 +159,7 @@ export default {
         '0': '超级管理员',
         '1': '管理员',
         '2': '操作员A',
-        '3': '操作员B'
+        '3': '操作员'
       },
       //   role: [
       //     {
@@ -194,18 +191,13 @@ export default {
         '1': '启用',
         '0': '禁用'
       },
-      //   status: [
-      //     {
-      //       enable: false,
-      //       value: '禁用'
-      //     },
-      //     {
-      //       enable: true,
-      //       value: '启用'
-      //     }
-      //   ],
-
-      list: []
+      list: [],
+      dialogData: {
+        loginName: '',
+        linkPerson: '',
+        roleId: '',
+        status: ''
+      }
     }
   },
   created() {
@@ -238,12 +230,21 @@ export default {
       this.show = false
     },
     handleClick(index, rows) {
+      console.log(index)
+      console.log(rows)
       rows.splice(index, 1)
     },
-    changeData(search) {
-      console.log(search)
+    changeData(action, data) {
       this.dialogTableVisible = true
-      this.search = JSON.parse(JSON.stringify(search))
+      if (action === 'edit' && data) {
+        data.status = this.status[data.status]
+        data.roleId = this.roleId[data.roleId]
+        this.dialogData = data
+        return
+      }
+      if (action === 'add') {
+        return
+      }
     },
     addData() {
       const data = {
@@ -263,6 +264,7 @@ export default {
           })
           setTimeout(() => {
             this.dialogTableVisible = false
+            this.getList()
           }, 1000)
         } else {
           this.$message.error(msg)
